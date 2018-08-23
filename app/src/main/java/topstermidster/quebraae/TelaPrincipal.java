@@ -1,14 +1,19 @@
 package topstermidster.quebraae;
 
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class TelaPrincipal extends AppCompatActivity {
@@ -38,22 +43,39 @@ public class TelaPrincipal extends AppCompatActivity {
         contagemCaracteres(textoClaro);
     }
 
+
     public String contagemCaracteres(String textoClaro) {
-        Map<Character, Integer> mapaLetras = new HashMap<Character, Integer>();
+        ArrayList<String> textoClaroArray = new ArrayList<>();
+        ArrayList<String> textoClaroCp = new ArrayList<>();
+        ArrayList<Integer> posicoes = new ArrayList<>();
 
-        char arr[] = textoClaro.toCharArray();
-
-        for( char letra: arr) {
-            if (!mapaLetras.containsValue(letra)) {
-                mapaLetras.put(letra, 0);
-            }
-
-            mapaLetras.put(letra, mapaLetras.get(letra) + 1);
+        for (int i = 0; i < textoClaro.length(); i++) {
+            textoClaroArray.add(String.valueOf(textoClaro.toString().charAt(i)));
+            textoClaroCp.add(String.valueOf(textoClaro.toString().charAt(i)));
+           // Log.v("contagem", "array" + textoClaroArray);
         }
 
-        Iterator<Integer> itr = mapaLetras.values().iterator();
-        while (itr.hasNext()) {
-            System.out.println(itr.next());
+        //textoClaroCp = textoClaroArray;
+        //System.arrtextoClaroArray, 0, textoClaroCp, 0, textoClaroArray.size());
+
+        for (int i = 0; i < textoClaroArray.size(); i++) {
+            //posicoes.add(i);
+            for (int j = i; j < textoClaroCp.size(); j++) {
+                if ( textoClaroCp.get(j).equals(textoClaroArray.get(i)) ) {
+                    posicoes.add(j);
+
+                    //textoClaroCp.indexOf(textoClaroArray.get(i));
+                    //Log.v("contagem","vetor1: " + textoClaroArray.get(i) + "/ vetor2:" + textoClaroCp.get(j));
+                }
+
+                for (int k = 0; k < textoClaroCp.size(); k++ ) {
+                    if ( textoClaroCp.get(j).equals(textoClaroArray.get(i)) ) {
+                        textoClaroCp.set(j, Integer.toString(j + 1) );
+                    }
+                }
+            }
+            Log.v("contagem","posicoes" + posicoes);
+            posicoes.clear();
         }
 
 
@@ -61,21 +83,16 @@ public class TelaPrincipal extends AppCompatActivity {
     }
 
 
-
-
-    public void fatorial(int qtd) {
+    public int fatorial(int qtd) {
         int fat = 1;
 
         for( int i = 2; i <= qtd; i++ )
         {
             fat *= i;
         }
+
+        return fat;
     }
-
-
-
-
-
 
 
     @Override
