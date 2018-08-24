@@ -18,81 +18,17 @@ import java.util.Map;
 
 public class TelaPrincipal extends AppCompatActivity {
 
-    EditText textoClaro ;
-    Button cifra;
-    TextView textoCifrado;
+    private ArrayList<String> textoClaroArray = new ArrayList<>();
+    private ArrayList<String> textoClaroCp = new ArrayList<>();
+    private ArrayList<Integer> posicoes = new ArrayList<>();
+
+    private EditText textoClaro ;
+    private Button cifra;
+    private TextView textoCifrado;
     private String cifrado = "";
     private String chave;
 
-    final int qtd = 127;
-
-
-    public void criptografar(String textoClaro) {
-
-       /* for(int i = 0; i < textoClaro.length(); i++) {
-            char caractere = textoClaro.charAt(i);
-            int decimal = (int) caractere;
-
-            //Log.v("valor", " decimal" + decimal + " Na posicao: " + i );
-            chave += (int) caractere + ";";
-
-            if(decimal != 32)
-                decimal = decimal + 3;
-            cifrado += (char) decimal;
-        }*/
-        contagemCaracteres(textoClaro);
-    }
-
-
-    public String contagemCaracteres(String textoClaro) {
-        ArrayList<String> textoClaroArray = new ArrayList<>();
-        ArrayList<String> textoClaroCp = new ArrayList<>();
-        ArrayList<Integer> posicoes = new ArrayList<>();
-
-        for (int i = 0; i < textoClaro.length(); i++) {
-            textoClaroArray.add(String.valueOf(textoClaro.toString().charAt(i)));
-            textoClaroCp.add(String.valueOf(textoClaro.toString().charAt(i)));
-           // Log.v("contagem", "array" + textoClaroArray);
-        }
-
-        //textoClaroCp = textoClaroArray;
-        //System.arrtextoClaroArray, 0, textoClaroCp, 0, textoClaroArray.size());
-
-        for (int i = 0; i < textoClaroArray.size(); i++) {
-            //posicoes.add(i);
-            for (int j = i; j < textoClaroCp.size(); j++) {
-                if ( textoClaroCp.get(j).equals(textoClaroArray.get(i)) ) {
-                    posicoes.add(j);
-
-                    //textoClaroCp.indexOf(textoClaroArray.get(i));
-                    //Log.v("contagem","vetor1: " + textoClaroArray.get(i) + "/ vetor2:" + textoClaroCp.get(j));
-                }
-
-                for (int k = 0; k < textoClaroCp.size(); k++ ) {
-                    if ( textoClaroCp.get(j).equals(textoClaroArray.get(i)) ) {
-                        textoClaroCp.set(j, Integer.toString(j + 1) );
-                    }
-                }
-            }
-            Log.v("contagem","posicoes" + posicoes);
-            posicoes.clear();
-        }
-
-
-        return "";
-    }
-
-
-    public int fatorial(int qtd) {
-        int fat = 1;
-
-        for( int i = 2; i <= qtd; i++ )
-        {
-            fat *= i;
-        }
-
-        return fat;
-    }
+    private final int qtd = 128;
 
 
     @Override
@@ -110,12 +46,91 @@ public class TelaPrincipal extends AppCompatActivity {
                 {
                     public void onClick(View view)
                     {
+                        cifrado = "";
                         criptografar(textoClaro.getText().toString());
                         textoCifrado.setText(cifrado);
-                        cifrado = "";
+
                     }
                 });
     }
+
+    public void criptografar(String textoClaro) {
+        contagemCaracteres(textoClaro);
+    }
+
+    public String somatorio(String fatorial, String decimal) {
+
+        char decimalAscii = decimal.charAt(0);
+        int decimalAsciiInteiro = (int) decimalAscii;
+
+        int posicoes = Integer.parseInt(fatorial) + decimalAsciiInteiro;
+        int somatorio = 0;
+
+        for(int i = 0; i < posicoes; i++) {
+
+            if(somatorio == qtd)
+                somatorio = 0;
+
+            somatorio++;
+
+        }
+
+        return Integer.toString(somatorio);
+    }
+
+
+
+    public void contagemCaracteres(String textoClaro) {
+
+        int qtd = 0;
+
+        for (int i = 0; i < textoClaro.length(); i++) {
+            textoClaroArray.add(String.valueOf(textoClaro.toString().charAt(i)));
+            textoClaroCp.add(String.valueOf(textoClaro.toString().charAt(i)));
+
+        }
+
+        for (int i = 0; i <= textoClaroArray.size(); i++) {
+            //posicoes.add(i);
+            qtd = 2;
+
+            for (int j = i; j < textoClaroCp.size(); j++) {
+                if ( textoClaroCp.get(j).equals(textoClaroArray.get(i)) ) {
+                    posicoes.add(j);
+
+                }
+            }
+
+            for (int k = 0; k < posicoes.size(); k++ ) {
+                    if(posicoes.size() > 0) {
+                        textoClaroCp.set(posicoes.get(k),  somatorio(fatorial(qtd), textoClaroCp.get(posicoes.get(k))));
+                        //somatorio()
+                        qtd++;
+                    }
+            }
+
+            posicoes.clear();
+        }
+        Log.v("contagem","posicoes" + textoClaroCp);
+
+        cifrado = textoClaroCp.toString();
+        textoClaroCp.clear();
+        //textoCifrado.setText(tex);
+    }
+
+    public String fatorial(int qtd) {
+        int fat = 1;
+
+        for( int i = 2; i <= qtd; i++ )
+        {
+            fat *= i;
+        }
+
+        return Integer.toString(fat);
+    }
+
+
+
 
 
 
