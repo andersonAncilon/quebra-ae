@@ -42,15 +42,11 @@ public class TelaPrincipal extends AppCompatActivity {
 
 
         cifrar.setOnClickListener(
-                new View.OnClickListener()
-                {
-                    public void onClick(View view)
-                    {
-                        cifrado = "";
-                        criptografar(textoClaro.getText().toString());
-                        textoCifrado.setText(cifrado);
+                view -> {
+                    cifrado = "";
+                    criptografar(textoClaro.getText().toString());
+                    textoCifrado.setText(cifrado);
 
-                    }
                 });
     }
 
@@ -104,6 +100,11 @@ public class TelaPrincipal extends AppCompatActivity {
             for (int k = 0; k < posicoes.size(); k++ ) {
                     if(posicoes.size() > 0) {
                         textoClaroCp.set(posicoes.get(k),  somatorio(fatorial(qtd), textoClaroCp.get(posicoes.get(k))));
+
+                        int charInteiro = Integer.parseInt(textoClaroCp.get(posicoes.get(k)));
+                        char caractere = (char) charInteiro;
+                        textoClaroCp.set(posicoes.get(k), String.valueOf(caractere));
+
                         //somatorio()
                         qtd++;
                     }
