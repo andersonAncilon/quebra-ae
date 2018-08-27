@@ -93,7 +93,6 @@ public class TelaPrincipal extends AppCompatActivity {
             for (int j = i; j < textoClaroCp.size(); j++) {
                 if ( textoClaroCp.get(j).equals(textoClaroArray.get(i)) ) {
                     posicoes.add(j);
-
                 }
             }
 
@@ -104,8 +103,6 @@ public class TelaPrincipal extends AppCompatActivity {
                         int charInteiro = Integer.parseInt(textoClaroCp.get(posicoes.get(k)));
                         char caractere = (char) charInteiro;
                         textoClaroCp.set(posicoes.get(k), String.valueOf(caractere));
-
-                        //somatorio()
                         qtd++;
                     }
             }
