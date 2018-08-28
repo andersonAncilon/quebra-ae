@@ -76,10 +76,14 @@ public class TelaPrincipal extends AppCompatActivity implements Serializable {
                 });
     }
 
+
+    //Método para iniciar a criptografia
     public void criptografar(String textoClaro) {
         contagemCaracteres(textoClaro);
     }
 
+
+    //Método que gera um valor aleatorio entre 1 e 4 para utilizar na chave
     public int random() {
         Random rand = new Random();
         int r = rand.nextInt(3) + 2;
@@ -87,6 +91,10 @@ public class TelaPrincipal extends AppCompatActivity implements Serializable {
         return r;
     }
 
+    /*Método responsável por fazer o cálculo do valor decimal do caractere
+      com o resultado do fatorial, além de realizar um loop para encontrar o novo
+      valor do respectivo caractere
+     */
     public String somatorio(String fatorial, String decimal) {
 
         char decimalAscii = decimal.charAt(0);
@@ -106,7 +114,10 @@ public class TelaPrincipal extends AppCompatActivity implements Serializable {
     }
 
 
-
+    /*Método responsável pela contagem dos caracteres repetidos
+      assim como armazena em um ArrayList de inteiros as posições das respectivas
+      repetições
+    */
     public void contagemCaracteres(String textoClaro) {
 
         int qtd = 0;
@@ -142,10 +153,9 @@ public class TelaPrincipal extends AppCompatActivity implements Serializable {
 
         cifrado = textoClaroCp.toString();
         textoClaroCp.clear();
-
-
     }
 
+    //Método para calcular o fatorial
     public String fatorial(int qtd) {
         int fat = 1;
 
@@ -156,7 +166,4 @@ public class TelaPrincipal extends AppCompatActivity implements Serializable {
 
         return Integer.toString(fat);
     }
-
-
-
 }
