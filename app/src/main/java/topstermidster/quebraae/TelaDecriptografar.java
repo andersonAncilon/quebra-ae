@@ -21,6 +21,7 @@ public class TelaDecriptografar extends AppCompatActivity {
     private String definKey = "";
     private int r = 0;
 
+    //Método para remover os colchetes da string criptografada
     public String stringFormat(String texto) {
 
         String formatada = texto.substring(1, texto.length() - 1);
@@ -50,9 +51,11 @@ public class TelaDecriptografar extends AppCompatActivity {
             key = b.getIntegerArrayList("key");
         }
 
+        //Valor pelo qual a chave foi multiplicado
         r = key.get(key.size() - 1);
-        //Log.v("aqui", "teste" + r);
 
+
+        //For para realizar a divisao da chave
         for (int i = 0; i < key.size() - 1; i++) {
             int valor = key.get(i) / r;
             char caractere = (char) valor;
